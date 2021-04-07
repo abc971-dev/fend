@@ -88,6 +88,13 @@ section {
     transition: ease 0.3s all;
 }
 
+/*Smaller font size for width of 500px and under*/
+@media(max-width:500px){ 
+    .navbar__menu .menu__link,p{
+        font-size:smaller;
+    } 
+}
+
 /* Header Styles */
 .page__header {
     background: #fff;
@@ -130,7 +137,7 @@ section:nth-of-type(even) .landing__container {
 }
 
 /* Background Circles */
-/* Note that background circles are created with psuedo elements before and after */
+/* Note that background circles are created with pseudo elements before and after */
 /* Circles appear to be random do to use of :nth-of-type psuedo class */
 section:nth-of-type(odd) .landing__container::before {
     content: '';
@@ -193,17 +200,18 @@ section:nth-of-type(3n + 1) .landing__container::after {
 /* ---- Theme State Rules ---- */
 /* Section Active Styles */
 /* Note: your-active-class class is applied through javascript. You should update the class here and in the index.html to what you set in your javascript file.  */
-section.your-active-class {
+section.active {
     background: rgb(0, 0, 0);
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
+    background: linear-gradient(0deg, rgba(220, 0, 0, 0.1) 0%, rgba(255, 0, 0, 0) 100%);
+    border:#333 2px solid;
 }
 
-section.your-active-class .landing__container::before {
+section.active .landing__container::before {
     opacity: 1;
     animation: rotate 4s linear 0s infinite forwards;
 }
 
-section.your-active-class .landing__container::after {
+section.active .landing__container::after {
     opacity: 1;
     animation: rotate 5s linear 0s infinite forwards reverse;
 }
@@ -221,3 +229,4 @@ section.your-active-class .landing__container::after {
 		           rotate(-360deg);
 	}
 }
+
