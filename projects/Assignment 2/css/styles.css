@@ -88,6 +88,11 @@ section {
     transition: ease 0.3s all;
 }
 
+.menu__link.active{
+    background:rgb(104,148,159);
+    border:2px solid #202020;
+}
+
 /*Smaller font size for width of 500px and under*/
 @media(max-width:500px){ 
     .navbar__menu .menu__link,p{

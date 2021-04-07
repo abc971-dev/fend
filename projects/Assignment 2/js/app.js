@@ -19,11 +19,9 @@
 */
 const sectionLists = document.querySelectorAll('section');
 const sectionTitles = getSectionInfo(sectionLists);
-const pageNav = document.getElementById('navbar__list');
-let currentUrl = document.location.href;
-// get NAV ul object
-
-let activeSection='section1';
+const pageNav = document.getElementById('navbar__list');// get NAV ul object
+let pageNavLinks = pageNav.childNodes;
+let activeSection='section1'; //section 1 is defined as the active section by default
 createNav();
 
 
@@ -79,6 +77,7 @@ function getSectionInfo(sections){
             if(e.target && e.target.nodeName == "A") {
                 e.preventDefault(); //Prevent click from triggering direct navigation
                 setSectionAsActive(e.target.getAttribute('data-nav')); //define section matching clicked navigation link as active section
+                setNavLinkAsActive(); //define clicked navigation link as active section
             }
         })
     }
@@ -88,14 +87,6 @@ function getSectionInfo(sections){
 
 function setSectionAsActive(s){
     activeSection=s;
-
-    if(currentUrl.indexOf('#')!==-1){
-        let newUrl = currentUrl.substring(1,currentUrl.indexOf('#'));
-        newUrl+=('#'+activeSection);
-        console.log(newUrl);
-        document.location.href=newUrl;
-    }
-
     for (sectionList of sectionLists){ //Loop through sections
         if(sectionList.id !== activeSection){ //Validate whether current section is the active section based on function param
             sectionList.classList.remove('active'); //remove the active CSS class from the former active section
@@ -107,5 +98,17 @@ function setSectionAsActive(s){
     navSection.scrollIntoView({behavior: "smooth"},{block:"start"}); //Scroll to active section
 
 }
+
+function setNavLinkAsActive(){
+    for (pageNavLink of pageNavLinks){ //Loop through navigation menu items
+        if(pageNavLink.querySelector('a').getAttribute('data-nav') !== activeSection){ //Validate whether menu item link matches the active section
+            pageNavLink.querySelector('a').classList.remove('active'); //remove the active CSS class from the former active navigation link
+        }else{
+            pageNavLink.querySelector('a').classList.add('active'); //add the active CSS class to the new active navigation link
+        }
+    }
+
+}
+
  
 
