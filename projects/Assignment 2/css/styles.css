@@ -92,11 +92,25 @@ section {
     background:rgb(104,148,159);
 }
 
-/*Smaller font size for width of 500px and under*/
-@media(max-width:500px){ 
-    .navbar__menu .menu__link,p{
-        font-size:0.9em;
-    } 
+/*Media queries for devices of width of 535px and under
+*/
+
+@media(max-width:535px){ 
+    .navbar__menu .menu__link{
+        font-size:0.65em;
+    }  
+    p{
+        font-size:0.85em;
+    }
+    h2{
+        font-size:2em;
+    }
+}
+
+@media(max-width:300px){ 
+    .navbar__menu .menu__link{
+        font-size:0.5em;
+    }
 }
 
 /* Header Styles */
