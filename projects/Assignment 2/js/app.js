@@ -63,6 +63,9 @@ function getSectionInfo(sections){
             let linkId = sectionTitles[i][0];
             let linkText = sectionTitles[i][1];
             link.classList='menu__link'; // set menu link CSS class
+            if(linkId==activeSection){
+                link.classList.add('active'); // add active nav link styling to default active section link
+            }
             link.setAttribute('href','#'+linkId); //set section ID as link href
             link.setAttribute('data-nav',linkId); //set section ID as link data-nav attribute
             link.setAttribute('title',linkText); //set section title as link info
