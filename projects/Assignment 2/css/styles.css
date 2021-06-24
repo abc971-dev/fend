@@ -58,6 +58,7 @@ main {
 section {
     position: relative;
     min-height: 80vh;
+    margin:5vh 0vh 5vh 0vh;
 }
 
 
@@ -139,12 +140,14 @@ section {
 .landing__container {
     padding: 1em;
     text-align: left;
+    margin:1em 0em 1em 0em;
 }
 
 @media only screen and (min-width: 35em){
     .landing__container {
         max-width: 50em;
         padding: 4em;
+        margin:2em 0em 2em 0em;
     }
 }
 

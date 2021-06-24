@@ -22,7 +22,10 @@ const sectionTitles = getSectionInfo(sectionLists);
 const pageNav = document.getElementById('navbar__list');// get NAV ul object
 let pageNavLinks = pageNav.childNodes;
 let activeSection='section1'; //section 1 is defined as the active section by default
-createNav();
+setSectionAsActive(activeSection,0);
+let intersectionObserverEvent=[];
+let options = {root: null,rootMargin: '10px',threshold: [0.3]} // set IntersectionObserverOptions
+
 
 
 /**
@@ -31,18 +34,42 @@ createNav();
  * 
 */
 
-//This function retrieves the ids and titles of each section
+addEventListener("load",setupEventTracking);
+addEventListener("scroll",function(){
+    let scrollEvent = intersectionObserverEvent[0];
+    if(scrollEvent != null && scrollEvent.isIntersecting){
+        setSectionAsActive(scrollEvent.target.parentElement.id,1);
+    }
+});
+
+function setupEventTracking(e){
+    createNav();
+    createIntersectionObservers();
+}
+
+function createIntersectionObservers(){ 
+let observer = new IntersectionObserver(function(e){
+              intersectionObserverEvent=e; //record intersection observer entry
+            },options);
+
+    for (sectionList of sectionLists){
+        observer.observe(sectionList.firstElementChild);
+    }
+
+}
+
+//This function retrieves the ids and titles of each section 
 function getSectionInfo(sections){
     let titleList=[];
   
   for (section of sections){
     let sectionId = section.id;
     let sectionTitle = section.firstElementChild.firstElementChild.textContent;
-
     titleList.push([sectionId, sectionTitle]);
   }
   return titleList;
 }
+
 
 /**
  * End Helper Functions
@@ -79,16 +106,15 @@ function getSectionInfo(sections){
         pageNav.addEventListener('click',function (e){ //add event listener to navigation menu
             if(e.target && e.target.nodeName == "A") {
                 e.preventDefault(); //Prevent click from triggering direct navigation
-                setSectionAsActive(e.target.getAttribute('data-nav')); //define section matching clicked navigation link as active section
-                setNavLinkAsActive(); //define clicked navigation link as active section
+                setSectionAsActive(e.target.getAttribute('data-nav'),0); //define section matching clicked navigation link as active section
             }
-        })
+        },true)
     }
 
 
 // Adds specific CSS class to the active section and scrolls it into view
 
-function setSectionAsActive(s){
+function setSectionAsActive(s,eventType){//evenType 0 is a click on the nav section and eventType 1 is scrolling. The variable is used to trigger scrolling into the section
     activeSection=s;
     for (sectionList of sectionLists){ //Loop through sections
         if(sectionList.id !== activeSection){ //Validate whether current section is the active section based on function param
@@ -98,10 +124,13 @@ function setSectionAsActive(s){
         }
     }
     let navSection = document.getElementById(activeSection); //store active section element in variable
-    navSection.scrollIntoView({behavior: "smooth"},{block:"start"}); //Scroll to active section
-
+    if (eventType==0){ //The page will only scroll to the selected section if the function was triggered by a click in the navigation
+        navSection.scrollIntoView({behavior: "smooth"},{block:"start"}); //Scroll to active section if user clicked
+    }
+    setNavLinkAsActive(); 
 }
 
+//Adds the active link styling to the navigation link of the active section
 function setNavLinkAsActive(){
     for (pageNavLink of pageNavLinks){ //Loop through navigation menu items
         if(pageNavLink.querySelector('a').getAttribute('data-nav') !== activeSection){ //Validate whether menu item link matches the active section
