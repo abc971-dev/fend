@@ -105,7 +105,6 @@ function setURLSectionAsActive(){ //If a link to a section is in the URL, it wil
             let linkId = sectionTitles[i][0];
             let linkText = sectionTitles[i][1];
             link.classList='menu__link'; // set menu link CSS class
-            link.setAttribute('href','#'+linkId); //set section ID as link href
             link.setAttribute('data-nav',linkId); //set section ID as link data-nav attribute
             link.setAttribute('title',linkText); //set section title as link info
             link.innerText=linkText; // set section title as link text

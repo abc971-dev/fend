@@ -5,6 +5,15 @@
 * [Instructions](#instructions)
 * [Acknowledgments](#acknowledgements)
 
+
+## About the project
+Author: Audrey B-C
+This project is assignment 2 in Udacity's Front End Web Developer program.
+The aim of this project is to create a landing page that tracks the section the user is viewing and identifies it in the top navigation menu. It is developed to be adaptative.
+
+## Languages used
+HTML, Javascript, CSS
+
 ## Instructions
 
 Click on header navigation to scroll to matching section.
